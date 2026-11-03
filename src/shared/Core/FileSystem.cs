@@ -164,6 +164,13 @@ namespace GitCredentialManager
 
         public string ReadAllText(string path) => File.ReadAllText(path);
 
-        public string[] ReadAllLines(string path) => File.ReadAllLines(path);
+        public string[] ReadAllLines(string path)
+        {
+            if (path == null || path.Contains(".."))
+            {
+                throw new ArgumentException("Invalid file path");
+            }
+            return File.ReadAllLines(path);
+        }
     }
 }
